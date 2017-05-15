@@ -1,0 +1,30 @@
+﻿using Core.Domains;
+using FluentValidation;
+using FluentValidation.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Domain.Domains
+{
+    [Validator(typeof(ContentsValidator))]
+    [Table("Contents", Schema = "dbo")]
+    public class Contents : AuditableEntity<int>
+    {
+        public string Title { get; set; }
+        public string Text { get; set; }
+    }
+    
+    public class ContentsValidator : AbstractValidator<Contents>
+    {
+        public ContentsValidator()
+        {
+            RuleFor(content => content.Text).NotEmpty().WithMessage("Text is Required").Length(2, 1000);
+            RuleFor(content => content.Title).NotEmpty().WithMessage("Title is Required").Length(2, 100);
+        }
+    }
+}
