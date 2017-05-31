@@ -17,8 +17,20 @@ namespace Services.ForgotPasswordServices
             _forgotPasswordRepository = forgotPasswordRepository;
             _adminsRepository = adminsRepository;
         }
-        public string GetHashCodes(int AdminId)
+        public bool GetLastHashCode(string hash, ref int ID)
         {
+            var result = _forgotPasswordRepository.GetLastHashCode(hash,ref ID);
+            return result;
+        }
+        public void updateIsUsed(string hash)
+        {
+            _forgotPasswordRepository.UpdateIsUsed(hash);
+        }
+
+        public bool UpdatePassword(string password, int ID)
+        {
+            var result = _forgotPasswordRepository.UpdatePassword(password,ID);
+            return result;
         }
     }
 }

@@ -10,5 +10,8 @@ namespace Infrastructure.Interfaces
 {
     public interface IForgotPasswordRepository : IRepository<ForgotPassword>
     {
+        bool GetLastHashCode(string hash, ref int ID);
+        void UpdateIsUsed(string hash);
+        bool UpdatePassword(string password,int ID);
     }
 }

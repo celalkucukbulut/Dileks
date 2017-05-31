@@ -14,19 +14,16 @@ namespace Domain.Domains
     [Table("ForgotPassword", Schema = "dbo")]
     public class ForgotPassword : AuditableEntity<int>
     {
-        public Guid GUID1 { get; set; }
-        public Guid GUID2 { get; set; }
-        public Guid GUID3 { get; set; }
+        public string Hash { get; set; }
         public int AdminId { get; set; }
+        public bool IsUsed { get; set; }
     }
 
     public class ForgotPasswordValidator : AbstractValidator<ForgotPassword>
     {
         public ForgotPasswordValidator()
         {
-            RuleFor(content => content.GUID1).NotEmpty().WithMessage("GUID1 is Required");
-            RuleFor(content => content.GUID2).NotEmpty().WithMessage("GUID2 is Required");
-            RuleFor(content => content.GUID3).NotEmpty().WithMessage("GUID3 is Required");
+            RuleFor(content => content.Hash).NotEmpty().WithMessage("Hash is Required");
             RuleFor(content => content.AdminId).NotEmpty().WithMessage("AdminId is Required");
         }
     }

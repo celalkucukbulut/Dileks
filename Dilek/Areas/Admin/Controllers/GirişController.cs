@@ -62,12 +62,24 @@ namespace Dilek.Areas.Admin.Controllers
         }
         public ActionResult ŞifreYenile(string hash)
         {
-            //check
-            return View();
+            int ID=0;
+            var dbHash = _forgotPasswordServices.GetLastHashCode(hash,ref ID);
+            if (dbHash)
+            {
+                _forgotPasswordServices.updateIsUsed(hash);
+                return View(ID);
+            }
+            return RedirectToAction("Index", "Giriş", new { Area = "Admin" });
         }
+        [HttpPost]
         public ActionResult UpdatePassword(string password,int ID)
         {
-            return RedirectToAction("Index", "Giriş", new { Area = "Admin" });
+            var result = _forgotPasswordServices.UpdatePassword(password,ID);
+            if (result)
+            {
+                return RedirectToAction("Index", "Giriş", new { Area = "Admin" });
+            }
+            return View();
         }
     }
 }

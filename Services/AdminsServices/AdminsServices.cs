@@ -44,13 +44,13 @@ namespace Services.AdminsServices
                 Guid GUID1 = Guid.NewGuid();
                 Guid GUID2 = Guid.NewGuid();
                 Guid GUID3 = Guid.NewGuid();
+                string hash = GUID1.ToString() + GUID2.ToString() + GUID3.ToString();
                 var forgot = new ForgotPassword()
                 {
                     CreatedDate = DateTime.Now,
                     AdminId = admin.ID,
-                    GUID1 = GUID1,
-                    GUID2 = GUID2,
-                    GUID3 = GUID3
+                    Hash = hash,
+                    IsUsed = false
                 };
                 _forgotPasswordRepository.Add(forgot);
                 MailMessage mail = new MailMessage();
@@ -62,7 +62,7 @@ namespace Services.AdminsServices
 
 Şifrenizi aşağıdaki linke tıklayarak yeniden oluşturabilirsiniz.
 
-http://localhost:3417/Admin/Giriş/ŞifreYenile?hash="+GUID1+GUID2+GUID3+@"
+http://localhost:3417/Admin/Giriş/ŞifreYenile?hash="+hash+@"
 
 İyi Günler.";
 

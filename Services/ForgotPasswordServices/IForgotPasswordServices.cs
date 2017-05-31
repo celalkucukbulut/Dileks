@@ -9,6 +9,8 @@ namespace Services.ForgotPasswordServices
 {
     public interface IForgotPasswordServices : IService
     {
-        string GetHashCodes(int AdminId);
+        bool GetLastHashCode(string hash, ref int ID);
+        void updateIsUsed(string hash);
+        bool UpdatePassword(string password, int ID);
     }
 }
