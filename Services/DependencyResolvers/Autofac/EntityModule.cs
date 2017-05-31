@@ -9,7 +9,6 @@ namespace Fifm.Services.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.RegisterType<DemoContext>().SingleInstance();
             builder.RegisterType<SqlDapperHelper>().As<DapperHelper>().As<IUnitofwork>().SingleInstance();
          }
     }

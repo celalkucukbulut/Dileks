@@ -17,14 +17,15 @@ namespace Domain.Domains
     {
         public string Title { get; set; }
         public string Text { get; set; }
+        public int DBCode { get; set; }
     }
     
     public class ContentsValidator : AbstractValidator<Contents>
     {
         public ContentsValidator()
         {
-            RuleFor(content => content.Text).NotEmpty().WithMessage("Text is Required").Length(2, 1000);
-            RuleFor(content => content.Title).NotEmpty().WithMessage("Title is Required").Length(2, 100);
+            RuleFor(content => content.Text).NotEmpty().WithMessage("Text is Required");
+            RuleFor(content => content.Title).NotEmpty().WithMessage("Title is Required").Length(1, 200);
         }
     }
 }

@@ -59,13 +59,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IAdminsRepository.cs" />
     <Compile Include="Interfaces\IContentsRepository.cs" />
+    <Compile Include="Interfaces\IForgotPasswordRepository.cs" />
     <Compile Include="Interfaces\IImagesRepository.cs" />
     <Compile Include="Interfaces\IDBCodesRepository.cs" />
     <Compile Include="Interfaces\IMessagesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AdminsRepository.cs" />
     <Compile Include="Repositories\ContentsRepository.cs" />
     <Compile Include="Repositories\DBCodesRepository.cs" />
+    <Compile Include="Repositories\ForgotPasswordRepository.cs" />
     <Compile Include="Repositories\ImagesRepository.cs" />
     <Compile Include="Repositories\MessagesRepository.cs" />
     <Compile Include="SqlDapperHelper.cs" />

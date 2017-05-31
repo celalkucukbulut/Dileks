@@ -10,5 +10,7 @@ namespace Infrastructure.Interfaces
 {
     public interface IImagesRepository : IRepository<Images>
     {
+        IEnumerable<Images> GetByDBCodes(int dbCode);
+        IEnumerable<Images> getAllProducts();
     }
 }

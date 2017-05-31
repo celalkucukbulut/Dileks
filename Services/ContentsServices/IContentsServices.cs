@@ -1,5 +1,6 @@
 ﻿using Core.Services.Interfaces;
 using Domain.Domains;
+using Services.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,9 @@ namespace Services.ContentsServices
     public interface IContentsServices : IService
     {
         IEnumerable<Contents> getAllContents();
+        IEnumerable<Contents> getAllContentsByDBCode(int dbCode);
+        ContactResult getAllContactContents();
+        IEnumerable<Contents> getAllProductContents();
+
     }
 }

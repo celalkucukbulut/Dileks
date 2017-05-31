@@ -2,6 +2,7 @@
 using Services.ContentsServices;
 using Services.DBCodesServices;
 using Services.ImagesServices;
+using Services.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,8 +30,10 @@ namespace Dilek.Controllers
         }
         public ActionResult Index()
         {
-            var image = _imagesServices.getImage(1);
-            return View(image);
+            var result = new HomepageResult();
+            result.Images = _imagesServices.getImagesByDBCodes(8);
+            result.Contents = _contentsServices.getAllContentsByDBCode(1);
+            return View(result);
         }
     }
 }

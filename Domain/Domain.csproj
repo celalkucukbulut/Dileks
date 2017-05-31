@@ -79,8 +79,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domains\Admins.cs" />
     <Compile Include="Domains\Contents.cs" />
     <Compile Include="Domains\DBCodes.cs" />
+    <Compile Include="Domains\ForgotPassword.cs" />
     <Compile Include="Domains\Images.cs" />
     <Compile Include="Domains\Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

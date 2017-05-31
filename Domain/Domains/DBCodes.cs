@@ -23,7 +23,7 @@ namespace Domain.Domains
         public DBCodesValidator()
         {
             RuleFor(dbCodes => dbCodes.Code).NotEmpty().WithMessage("Code is Required");
-            RuleFor(dbCodes => dbCodes.About).NotEmpty().WithMessage("Code is Required").Length(2,50);
+            RuleFor(dbCodes => dbCodes.About).NotEmpty().WithMessage("About is Required").Length(2,50);
         }
     }
 }

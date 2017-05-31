@@ -23,7 +23,8 @@ namespace Dilek.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            var result = _contentsServices.getAllContentsByDBCode(2);
+            return View(result);
         }
     }
 }

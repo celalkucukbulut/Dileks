@@ -10,5 +10,8 @@ namespace Infrastructure.Interfaces
 {
     public interface IContentsRepository : IRepository<Contents>
     {
+        IEnumerable<Contents> getAllContentsByDBCode(int dbCode);
+        IEnumerable<Contents> getAllContactContents();
+        IEnumerable<Contents> getAllProductContents();
     }
 }

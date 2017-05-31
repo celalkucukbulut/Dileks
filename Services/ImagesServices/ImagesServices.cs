@@ -24,10 +24,21 @@ namespace Services.ImagesServices
             return images;
         }
 
+        public IEnumerable<Images> getAllProducts()
+        {
+            var images = _imagesRepository.getAllProducts();
+            return images;
+        }
+
         public Images getImage(int id)
         {
             var image = _imagesRepository.Get(id);
             return image;
+        }
+        public IEnumerable<Images> getImagesByDBCodes(int dbCode)
+        {
+            var images = _imagesRepository.GetByDBCodes(dbCode);
+            return images;
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Services.ImagesServices
     public interface IImagesServices : IService
     {
         IEnumerable<Images> getAllImages();
+        IEnumerable<Images> getAllProducts();
+        IEnumerable<Images> getImagesByDBCodes(int dbCode);
         Images getImage(int id);
     }
 }

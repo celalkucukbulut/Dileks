@@ -24,8 +24,10 @@ namespace Domain.Domains
     {
         public MessagesValidator()
         {
-            RuleFor(Messages => Messages.Name).NotEmpty().WithMessage("Code is Required").Length(2,50);
-            RuleFor(Messages => Messages.Text).NotEmpty().WithMessage("Code is Required").Length(2, 1000);
+            RuleFor(Messages => Messages.Name).NotEmpty().WithMessage("Name is Required").Length(2,50);
+            RuleFor(Messages => Messages.Text).NotEmpty().WithMessage("Text is Required");
+            RuleFor(Messages => Messages.Phone).Length(0,11).WithMessage("Phone is Required");
+            RuleFor(Messages => Messages.Mail).Length(0,50).WithMessage("Mail is Required");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.Repositories.Dapper;
+using Dapper;
 using Domain.Domains;
 using Infrastructure.Interfaces;
 using System;
@@ -13,6 +14,27 @@ namespace Infrastructure.Repositories
     {
         public ContentsRepository(DapperHelper dapperHelper) : base(dapperHelper)
         {
+        }
+
+        public IEnumerable<Contents> getAllContactContents()
+        {
+            string sql = $@"Select * from Contents c Where c.DBCode = 7 or c.DBCode = 11 ";
+            sql += " Order by c.CreatedDate";
+            return _dapperHelper.Connection.Query<Contents>(sql);
+        }
+
+        public IEnumerable<Contents> getAllContentsByDBCode(int dbCode)
+        {
+            string sql = $@"Select * from Contents c Where c.DBCode = @DBCode ";
+            sql += " Order by c.CreatedDate";
+            return _dapperHelper.Connection.Query<Contents>(sql, new { DBCode = dbCode });
+        }
+
+        public IEnumerable<Contents> getAllProductContents()
+        {
+            string sql = $@"Select * from Contents c Where c.DBCode = 4 or c.DBCode = 5 or c.DBCode = 6 or c.DBCode = 10  ";
+            sql += " Order by c.CreatedDate";
+            return _dapperHelper.Connection.Query<Contents>(sql);
         }
     }
 }

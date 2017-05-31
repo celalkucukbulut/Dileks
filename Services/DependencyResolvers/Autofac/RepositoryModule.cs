@@ -12,7 +12,8 @@ namespace Fifm.Services.DependencyResolvers.Autofac
             builder.RegisterType<DBCodesRepository>().As<IDBCodesRepository>();
             builder.RegisterType<ContentsRepository>().As<IContentsRepository>();
             builder.RegisterType<MessagesRepository>().As<IMessagesRepository>();
-
+            builder.RegisterType<AdminsRepository>().As<IAdminsRepository>();
+            builder.RegisterType<ForgotPasswordRepository>().As<IForgotPasswordRepository>();
         }
     }
 }

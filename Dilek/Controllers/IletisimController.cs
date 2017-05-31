@@ -10,17 +10,21 @@ namespace Dilek.Controllers
     public class IletisimController : Controller
     {
         public readonly IMessagesServices _messagesServices;
+        public readonly IContentsServices _contentService;
         public IletisimController()
         {
         }
         public IletisimController(
-            IMessagesServices messagesServices)
+            IMessagesServices messagesServices,
+            IContentsServices contentService)
         {
             _messagesServices = messagesServices;
+            _contentService = contentService;
         }
         public ActionResult Index()
         {
-            return View();
+            var result = _contentService.getAllContactContents();
+            return View(result);
         }
         [HttpPost]
         public ActionResult SendUs(Messages message)
