@@ -15,6 +15,7 @@ namespace Services.ContentsServices
         IEnumerable<Contents> getAllContentsByDBCode(int dbCode);
         ContactResult getAllContactContents();
         IEnumerable<Contents> getAllProductContents();
-        void UpdateContent(Contents content);
+        bool UpdateContent(Contents content);
+        bool DeleteContent(int id);
     }
 }

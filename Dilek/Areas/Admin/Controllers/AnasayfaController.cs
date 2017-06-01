@@ -50,7 +50,17 @@ namespace Dilek.Areas.Admin.Controllers
                 Text = text,
                 Title = title
             };
-            _contentsServices.UpdateContent(content);
+            var result = _contentsServices.UpdateContent(content);
+            if (result)
+                return RedirectToAction("Index");
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult DeleteText(int ID)
+        {
+            var result = _contentsServices.DeleteContent(ID);
+            if (result)
+                return RedirectToAction("Index");
             return RedirectToAction("Index");
         }
     }

@@ -28,8 +28,21 @@
     </h1>
     <hr>
 </div>
-
-
+@{int a = 0; }
+@foreach (var item in Model.Images)
+{
+    a += 1;
+    <div class="col-sm-4 text-center">
+        <img class="img-responsive img-thumbnail" src="@Url.Content(item.FilePath)" alt="@item.Code">
+        <h4>
+            <small>@item.Text</small>
+        </h4>
+    </div>
+    if (a % 3 == 0)
+    {
+        <div class="clearfix"></div>
+    }
+}
 
 
 
@@ -52,6 +65,7 @@
                 <div class="form-group col-lg-1">
                     <label></label>
                     <input class="btn btn-success" type="submit" value="Güncelle" />
+                    <button class="btn btn-danger" type="submit" formaction="@Url.Action("DeleteText", "Anasayfa", new { Area = "Admin" })">Sil</button>
                 </div>
             </div>
         </div>

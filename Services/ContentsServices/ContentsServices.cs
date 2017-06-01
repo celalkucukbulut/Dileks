@@ -20,6 +20,8 @@ namespace Services.ContentsServices
             _contentsRepository = contentsRepository;
         }
 
+      
+
         public ContactResult getAllContactContents()
         {
             var contents = _contentsRepository.getAllContactContents();
@@ -48,10 +50,31 @@ namespace Services.ContentsServices
             return contents;
         }
 
-        public void UpdateContent(Contents content)
+        public bool UpdateContent(Contents content)
         {
-            content.ModifyDate = DateTime.Now;
-            _contentsRepository.Update(content);
+            try
+            {
+                content.ModifyDate = DateTime.Now;
+                _contentsRepository.Update(content);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+        }
+        public bool DeleteContent(int id)
+        {
+            try
+            {
+                _contentsRepository.Delete(id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
