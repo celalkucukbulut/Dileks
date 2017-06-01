@@ -1,35 +1,60 @@
-﻿
+﻿@model Services.Results.HomepageResult
 @{
     ViewBag.Title = "Anasayfa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="col-lg-12 text-center">
+    <div id="carousel-example-generic" class="carousel slide">
+        <div class="carousel-inner" style="height:445px !important">
+                @using (Html.BeginForm("UploadFiles", "Anasayfa", new { Area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <label style="margin-bottom:15px" for="files" class="btn btn-default btn-file">
+                        Fotoğraf Seç <input type="file" name="files" id="files" class="hidden" accept="image/jpeg, image/png,image/jpg" onchange="readURL(this);" />
+                    </label>
+                    <input style="margin-bottom:15px" id="saveImage" class="btn btn-success" type="submit" value="Yükle" disabled />
+                    <div style="height:445px !important">
+                        <img style="height:100% !important;width:100% !important" class="img-responsive img-full hidden" src="#" id="showImage">
+                    </div>
+                }
+        </div>
+    </div>
+</div>
 
-@using (Html.BeginForm("UploadFiles", "Anasayfa", new { Area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+<div class="col-lg-12">
+    <hr>
+    <h1 class="intro-text text-center">
+        <strong>Anasayfa</strong>
+    </h1>
+    <hr>
+</div>
+
+
+
+
+
+@foreach (var item in Model.Contents)
 {
-    <label class="btn btn-default btn-file">
-        Fotoğraf Seç <input type="file" id="files" class="hidden" accept="image/jpeg, image/png,image/jpg" onchange="readURL(this);"/>
-    </label>
-    <img id="showImage" src="#" class="hidden" />
-    <input class="btn btn-success" type="submit" value="Kaydet" />
+    <form action="@Url.Action("UpdateText", "Anasayfa", new { Area = "Admin" })" method="post">
+        <div class="row">
+            <div class="form-group col-lg-12">
+                <input type="hidden" name="ID" id="ID" value="@item.ID" />
+                <input type="hidden" name="CreatedDate" id="CreatedDate" value="@item.CreatedDate" />
+                <input type="hidden" name="DBCode" id="DBCode" value="@item.DBCode" />
+                <div class="form-group col-lg-4">
+                    <label>Başlık</label>
+                    <input type="text" class="form-control" value="@item.Title" id="title" name="title">
+                </div>
+                <div class="form-group col-lg-7">
+                    <label>Yazı</label>
+                    <textarea class="form-control" rows="6" id="text" name="text">@item.Text</textarea>
+                </div>
+                <div class="form-group col-lg-1">
+                    <label></label>
+                    <input class="btn btn-success" type="submit" value="Güncelle" />
+                </div>
+            </div>
+        </div>
+    </form>
 }
-
-
-<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#showImage')
-                    .attr('src', e.target.result)
-                    .width(150)
-                    .height(200)
-                    .removeClass("hidden");
-                
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
+       

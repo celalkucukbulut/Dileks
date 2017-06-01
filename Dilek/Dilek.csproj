@@ -244,6 +244,7 @@
     <Content Include="img\slide-3.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\Custom.js" />
     <Content Include="js\index.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\lightbox-plus-jquery.js" />

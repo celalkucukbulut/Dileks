@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Domain.Domains;
+using Services.ContentsServices;
+using Services.ImagesServices;
+using Services.Results;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,20 +13,44 @@ namespace Dilek.Areas.Admin.Controllers
 {
     public class AnasayfaController : BaseController
     {
-        // GET: Admin/Anasayfa
+        private readonly IImagesServices _imagesServices;
+        private readonly IContentsServices _contentsServices;
+        public AnasayfaController(IImagesServices imagesServices
+            , IContentsServices contentsService)
+        {
+            _imagesServices = imagesServices;
+            _contentsServices = contentsService;
+        }
         public ActionResult Index()
         {
-            return View();
+            var result = new HomepageResult();
+            result.Images = _imagesServices.getImagesByDBCodes(8);
+            result.Contents = _contentsServices.getAllContentsByDBCode(1);
+            return View(result);
         }
         [HttpPost]
-        public ActionResult UploadFiles(HttpPostedFileBase file)
+        public ActionResult UploadFiles(HttpPostedFileBase files)
         {
-            if (file != null && file.ContentLength > 0)
+            if (files != null && files.ContentLength > 0)
             {
-                var fileName = Path.GetFileName(file.FileName);
+                var fileName = Path.GetFileName(files.FileName);
                 var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                file.SaveAs(path);
+                files.SaveAs(path);
+                _imagesServices.InsertSliderImage(fileName);
             }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult UpdateText(int ID, string title, string text,DateTime CreatedDate, int DBCode)
+        {
+            Contents content = new Contents() {
+                CreatedDate = CreatedDate,
+                DBCode = DBCode,
+                ID = ID,
+                Text = text,
+                Title = title
+            };
+            _contentsServices.UpdateContent(content);
             return RedirectToAction("Index");
         }
     }

@@ -19,21 +19,21 @@ namespace Infrastructure.Repositories
         public IEnumerable<Contents> getAllContactContents()
         {
             string sql = $@"Select * from Contents c Where c.DBCode = 7 or c.DBCode = 11 ";
-            sql += " Order by c.CreatedDate";
+            sql += " Order by c.Id asc";
             return _dapperHelper.Connection.Query<Contents>(sql);
         }
 
         public IEnumerable<Contents> getAllContentsByDBCode(int dbCode)
         {
             string sql = $@"Select * from Contents c Where c.DBCode = @DBCode ";
-            sql += " Order by c.CreatedDate";
+            sql += " Order by c.Id asc";
             return _dapperHelper.Connection.Query<Contents>(sql, new { DBCode = dbCode });
         }
 
         public IEnumerable<Contents> getAllProductContents()
         {
             string sql = $@"Select * from Contents c Where c.DBCode = 4 or c.DBCode = 5 or c.DBCode = 6 or c.DBCode = 10  ";
-            sql += " Order by c.CreatedDate";
+            sql += " Order by c.Id asc";
             return _dapperHelper.Connection.Query<Contents>(sql);
         }
     }

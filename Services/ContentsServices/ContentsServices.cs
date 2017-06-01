@@ -47,6 +47,12 @@ namespace Services.ContentsServices
             var contents = _contentsRepository.getAllProductContents();
             return contents;
         }
+
+        public void UpdateContent(Contents content)
+        {
+            content.ModifyDate = DateTime.Now;
+            _contentsRepository.Update(content);
+        }
     }
 
 }

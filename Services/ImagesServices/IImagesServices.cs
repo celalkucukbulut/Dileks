@@ -13,5 +13,6 @@ namespace Services.ImagesServices
         IEnumerable<Images> getAllProducts();
         IEnumerable<Images> getImagesByDBCodes(int dbCode);
         Images getImage(int id);
+        void InsertSliderImage(string path);
     }
 }

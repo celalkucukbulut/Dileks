@@ -27,7 +27,7 @@ namespace Domain.Domains
             RuleFor(image => image.FilePath).NotEmpty().WithMessage("FilePath is Required");
             RuleFor(image => image.DBCode).NotEmpty().WithMessage("DBCode is Required");
             RuleFor(image => image.Text).Length(2,200).WithMessage("Text is Required");
-            RuleFor(image => image.Code).Length(2,50).WithMessage("Code is Required");
+            RuleFor(image => image.Code).Length(2,100).WithMessage("Code is Required");
         }
     }
 

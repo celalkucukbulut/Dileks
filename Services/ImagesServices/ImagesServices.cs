@@ -40,5 +40,16 @@ namespace Services.ImagesServices
             var images = _imagesRepository.GetByDBCodes(dbCode);
             return images;
         }
+
+        public void InsertSliderImage(string path)
+        {
+            var Images = new Images();
+            Images.CreatedDate = DateTime.Now;
+            Images.DBCode = 8;
+            Images.Code = "Slider" + path;
+            path = "~/Images/" + path;
+            Images.FilePath = path;
+            _imagesRepository.Add(Images);
+        }
     }
 }
