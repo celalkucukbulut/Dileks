@@ -68,7 +68,7 @@ namespace Services.ContentsServices
         {
             try
             {
-                _contentsRepository.Delete(id);
+                _contentsRepository.Delete(new Contents { ID = id });
                 return true;
             }
             catch

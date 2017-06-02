@@ -5,18 +5,29 @@
 }
 
 <div class="col-lg-12 text-center">
-    <div id="carousel-example-generic" class="carousel slide">
-        <div class="carousel-inner" style="height:445px !important">
-                @using (Html.BeginForm("UploadFiles", "Anasayfa", new { Area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <label style="margin-bottom:15px" for="files" class="btn btn-default btn-file">
+    <div>
+        <div style="height:100% !important">
+            @using (Html.BeginForm("UploadFiles", "Anasayfa", new { Area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group col-lg-12">
+                    <label style="margin:15px" for="files" class="btn btn-default btn-file">
                         Fotoğraf Seç <input type="file" name="files" id="files" class="hidden" accept="image/jpeg, image/png,image/jpg" onchange="readURL(this);" />
                     </label>
-                    <input style="margin-bottom:15px" id="saveImage" class="btn btn-success" type="submit" value="Yükle" disabled />
-                    <div style="height:445px !important">
-                        <img style="height:100% !important;width:100% !important" class="img-responsive img-full hidden" src="#" id="showImage">
+                    <input style="margin:15px" id="saveImage" class="btn btn-success" type="submit" value="Yükle" disabled />
+                </div>
+                <div class="form-group col-lg-12 hidden" id="imageDiv" style="height:445px !important">
+                    <div class="form-group col-lg-12">
+                        <img style="height:100% !important;width:100% !important" class="img-responsive img-full" src="#" id="showImage">
                     </div>
-                }
+                    <div class="form-group col-lg-12">
+                        <div class="form-group col-lg-2"></div>
+                        <div class="form-group col-lg-8">
+                            <textarea class="form-control" rows="1" id="text" name="text" placeholder="Alt yazı ekleyebilirsiniz. Öncesinde yükleyeceğiniz fotoğrafı seçiniz." style="resize:none"></textarea>
+                        </div>
+                        <div class="form-group col-lg-2"></div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -24,7 +35,7 @@
 <div class="col-lg-12">
     <hr>
     <h1 class="intro-text text-center">
-        <strong>Anasayfa</strong>
+        <strong>Anasayfa Fotoğrafları</strong>
     </h1>
     <hr>
 </div>
@@ -33,10 +44,17 @@
 {
     a += 1;
     <div class="col-sm-4 text-center">
-        <img class="img-responsive img-thumbnail" src="@Url.Content(item.FilePath)" alt="@item.Code">
+        <a href="@Url.Content(item.FilePath)" data-title="@item.Text" data-lightbox="roadtripSlider"><img class="img-responsive img-thumbnail" src="@Url.Content(item.FilePath)" alt="@item.Code"></a>
         <h4>
-            <small>@item.Text</small>
+            <textarea class="form-control" id="text" name="text" style="resize:none">@item.Text</textarea>
         </h4>
+        <a href="@Url.Action("UpdateSliderText", "Anasayfa", new { Area = "Admin" })" class="icon-block">
+            <i class="fa-3x fa fa-save" title="Düzenle"></i>
+        </a>
+        <div class="col-sm-1"></div>
+        <a href="@Url.Action("DeleteSlider", "Anasayfa", new { Area = "Admin" })" class="icon-block">
+            <i class="fa-3x fa fa-trash" title="Sil"></i>
+        </a>
     </div>
     if (a % 3 == 0)
     {
@@ -71,4 +89,3 @@
         </div>
     </form>
 }
-       

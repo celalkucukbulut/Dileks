@@ -5,6 +5,7 @@
         reader.onload = function (e) {
             $('#showImage')
                 .attr('src', e.target.result)
+            $('#imageDiv')
                 .removeClass("hidden");
             $('#saveImage')
                 .removeAttr("disabled");

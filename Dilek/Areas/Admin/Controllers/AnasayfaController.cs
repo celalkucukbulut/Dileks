@@ -29,14 +29,14 @@ namespace Dilek.Areas.Admin.Controllers
             return View(result);
         }
         [HttpPost]
-        public ActionResult UploadFiles(HttpPostedFileBase files)
+        public ActionResult UploadFiles(HttpPostedFileBase files, string text)
         {
             if (files != null && files.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(files.FileName);
                 var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                 files.SaveAs(path);
-                _imagesServices.InsertSliderImage(fileName);
+                _imagesServices.InsertSliderImage(fileName,text);
             }
             return RedirectToAction("Index");
         }

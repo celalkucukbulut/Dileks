@@ -41,11 +41,12 @@ namespace Services.ImagesServices
             return images;
         }
 
-        public void InsertSliderImage(string path)
+        public void InsertSliderImage(string path,string text)
         {
             var Images = new Images();
             Images.CreatedDate = DateTime.Now;
             Images.DBCode = 8;
+            Images.Text = text;
             Images.Code = "Slider" + path;
             path = "~/Images/" + path;
             Images.FilePath = path;
