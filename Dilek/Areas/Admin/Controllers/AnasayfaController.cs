@@ -63,5 +63,30 @@ namespace Dilek.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult AddText(string title, string text)
+        {
+            var result = _contentsServices.AddText(title, text,1);
+            if (result)
+                return RedirectToAction("Index");
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult DeleteSlider(int ID)
+        {
+            var result = _imagesServices.DeleteImage(ID);
+            if (result)
+                return RedirectToAction("Index");
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult UpdateSliderText(int ID, string text,DateTime CreatedDate, int DBCode,string Code,string FilePath)
+        {
+            var result = _imagesServices.UpdateImage(ID, text, CreatedDate, DBCode, Code, FilePath);
+            if (result)
+                return RedirectToAction("Index");
+            return RedirectToAction("Index");
+        }
+
     }
 }

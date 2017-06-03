@@ -14,3 +14,6 @@
         reader.readAsDataURL(input.files[0]);
     }
 }
+function showDiv() {
+    document.getElementById('area').style.display = "block";
+}

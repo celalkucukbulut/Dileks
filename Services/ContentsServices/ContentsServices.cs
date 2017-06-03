@@ -76,6 +76,24 @@ namespace Services.ContentsServices
                 return false;
             }
         }
+
+        public bool AddText(string title, string text,int dbCode)
+        {
+            Contents newContent = new Contents();
+            newContent.CreatedDate = DateTime.Now;
+            newContent.DBCode = dbCode;
+            newContent.Text = text;
+            newContent.Title = title;
+            try
+            {
+                _contentsRepository.Add(newContent);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 
 }

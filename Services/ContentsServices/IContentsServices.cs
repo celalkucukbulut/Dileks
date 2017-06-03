@@ -17,5 +17,6 @@ namespace Services.ContentsServices
         IEnumerable<Contents> getAllProductContents();
         bool UpdateContent(Contents content);
         bool DeleteContent(int id);
+        bool AddText(string title, string text,int dbCode);
     }
 }

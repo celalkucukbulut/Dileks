@@ -17,13 +17,25 @@ namespace Services.ImagesServices
         {
             _imagesRepository = imagesRepository;
         }
+        
         #endregion
         public IEnumerable<Images> getAllImages()
         {
             var images = _imagesRepository.GetList();
             return images;
         }
-
+        public bool DeleteImage(int ID)
+        {
+            try
+            {
+                _imagesRepository.Delete(new Images { ID = ID });
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public IEnumerable<Images> getAllProducts()
         {
             var images = _imagesRepository.getAllProducts();
@@ -41,7 +53,7 @@ namespace Services.ImagesServices
             return images;
         }
 
-        public void InsertSliderImage(string path,string text)
+        public bool InsertSliderImage(string path,string text)
         {
             var Images = new Images();
             Images.CreatedDate = DateTime.Now;
@@ -50,7 +62,37 @@ namespace Services.ImagesServices
             Images.Code = "Slider" + path;
             path = "~/Images/" + path;
             Images.FilePath = path;
-            _imagesRepository.Add(Images);
+            try
+            {
+                _imagesRepository.Add(Images);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool UpdateImage(int ID, string text, DateTime CreatedDate, int DBCode,string Code,string FilePath)
+        {
+            try
+            {
+                _imagesRepository.Update(new Images
+                {
+                    CreatedDate = CreatedDate,
+                    DBCode = DBCode,
+                    Code = Code,
+                    FilePath = FilePath,
+                    ID = ID,
+                    ModifyDate = DateTime.Now,
+                    Text = text
+                });
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
     }
 }
