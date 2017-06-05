@@ -72,6 +72,25 @@ namespace Services.ImagesServices
                 return false;
             }
         }
+        public bool InsertImage(string path, string text,int dbCode)
+        {
+            var Images = new Images();
+            Images.CreatedDate = DateTime.Now;
+            Images.DBCode = dbCode;
+            Images.Text = text;
+            Images.Code = "Image" + path;
+            path = "~/Images/" + path;
+            Images.FilePath = path;
+            try
+            {
+                _imagesRepository.Add(Images);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public bool UpdateImage(int ID, string text, DateTime CreatedDate, int DBCode,string Code,string FilePath)
         {
             try

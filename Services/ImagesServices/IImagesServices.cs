@@ -16,5 +16,6 @@ namespace Services.ImagesServices
         bool InsertSliderImage(string path, string text);
         bool DeleteImage(int ID);
         bool UpdateImage(int ID, string text, DateTime CreatedDate, int DBCode,string Code,string FilePath);
+        bool InsertImage(string path, string text, int dbCode);
     }
 }

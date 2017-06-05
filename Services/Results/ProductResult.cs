@@ -1,4 +1,5 @@
 ﻿using Domain.Domains;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Services.Results
     {
         public IEnumerable<Images> Images { get; set; }
         public IEnumerable<Contents> Contents { get; set; }
+        public Gender Gender { get; set; }
     }
 }

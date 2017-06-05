@@ -85,6 +85,7 @@
     <Compile Include="Domains\ForgotPassword.cs" />
     <Compile Include="Domains\Images.cs" />
     <Compile Include="Domains\Messages.cs" />
+    <Compile Include="Enums\Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
