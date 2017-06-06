@@ -10,5 +10,6 @@ namespace Services.Results
     public class ContactResult
     {
         public IEnumerable<Contents> Contents { get; set; }
+        public IEnumerable<Messages> Messages { get; set; }
     }
 }

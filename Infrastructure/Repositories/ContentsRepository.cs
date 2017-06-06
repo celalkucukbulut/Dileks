@@ -18,7 +18,7 @@ namespace Infrastructure.Repositories
 
         public IEnumerable<Contents> getAllContactContents()
         {
-            string sql = $@"Select * from Contents c Where c.DBCode = 7 or c.DBCode = 11 ";
+            string sql = $@"Select * from Contents c Where c.DBCode = 7 or c.DBCode = 11 or c.DBCode = 12 ";
             sql += " Order by c.Id asc";
             return _dapperHelper.Connection.Query<Contents>(sql);
         }

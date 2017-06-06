@@ -33,5 +33,11 @@ namespace Services.MessagesServices
                 return false;
             }
         }
+
+        public IEnumerable<Messages> ShowMessages()
+        {
+            var result = _messagesRepository.GetList().OrderByDescending(p=>p.CreatedDate);
+            return result;
+        }
     }
 }

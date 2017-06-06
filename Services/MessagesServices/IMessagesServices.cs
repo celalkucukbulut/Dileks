@@ -11,5 +11,6 @@ namespace Services.MessagesServices
     public interface IMessagesServices : IService
     {
         bool InsertMessage(Messages message);
+        IEnumerable<Messages> ShowMessages();
     }
 }
