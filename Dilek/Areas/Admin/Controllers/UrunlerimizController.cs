@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using Domain.Domains;
+using Domain.Enums;
 using Services.ContentsServices;
 using Services.DBCodesServices;
 using Services.ImagesServices;
@@ -39,7 +40,6 @@ namespace Dilek.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UploadFiles(HttpPostedFileBase files, string text,Gender gender)
         {
-            int a = (int)gender;
             if (files != null && files.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(files.FileName);
@@ -47,6 +47,57 @@ namespace Dilek.Areas.Admin.Controllers
                 files.SaveAs(path);
                 _imagesServices.InsertImage(fileName, text,(int)gender);
             }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult UpdateText(int ID, string title, string text, DateTime CreatedDate, int DBCode)
+        {
+            Contents content = new Contents()
+            {
+                CreatedDate = CreatedDate,
+                DBCode = DBCode,
+                ID = ID,
+                Text = text,
+                Title = title
+            };
+            var result = _contentsServices.UpdateContent(content);
+            if (result)
+                return RedirectToAction("Index");
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult DeleteText(int ID)
+        {
+            var result = _contentsServices.DeleteContent(ID);
+            if (result)
+                return RedirectToAction("Index");
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult AddText(string title, string text,int? gender)
+        {
+            if (!(gender.HasValue))
+                gender = 10;
+
+            var result = _contentsServices.AddText(title, text, gender.Value);
+            if (result)
+                return RedirectToAction("Index");
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult DeleteImage(int ID)
+        {
+            var result = _imagesServices.DeleteImage(ID);
+            if (result)
+                return RedirectToAction("Index");
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult UpdateImageText(int ID, string text, DateTime CreatedDate, int DBCode, string Code, string FilePath)
+        {
+            var result = _imagesServices.UpdateImage(ID, text, CreatedDate, DBCode, Code, FilePath);
+            if (result)
+                return RedirectToAction("Index");
             return RedirectToAction("Index");
         }
     }

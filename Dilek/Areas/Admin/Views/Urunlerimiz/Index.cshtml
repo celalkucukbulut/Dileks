@@ -12,7 +12,7 @@
     <hr>
 </div>
 
-@foreach (var item in Model.Contents.Where(q => q.DBCode == 10))
+@foreach (var item in Model.Contents)
 {
     <form action="@Url.Action("UpdateText", "Urunlerimiz", new { Area = "Admin" })" method="post">
         <div class="row">
@@ -44,7 +44,7 @@
         </div>
     </form>
 }
-@if (Model.Contents.Where(q => q.DBCode == 10).Count().Equals(0))
+@if (Model.Contents.Count().Equals(0))
 {
     <form method="post">
         <div class="form-group col-lg-12" id="area">
@@ -55,6 +55,7 @@
             <div class="form-group col-lg-7"> 
                 <label>Yazı</label>
                 <textarea class="form-control" rows="6" id="text" name="text"></textarea>
+                @Html.EnumDropDownListFor(model => model.Gender, "Ürünlerimiz", new {@value="0", @class = "form-control" })
             </div>
             <div class="form-group col-lg-1" style="padding-top:25px">
                 <label></label>
@@ -72,6 +73,7 @@
         <div class="form-group col-lg-7">
             <label>Yazı</label>
             <textarea class="form-control" rows="6" id="text" name="text"></textarea>
+            @Html.EnumDropDownListFor(model => model.Gender, "Ürünlerimiz", new { @class = "form-control" })
         </div>
         <div class="form-group col-lg-1" style="padding-top:25px">
             <label></label>
@@ -109,12 +111,19 @@
 <div class="col-lg-12">
     <hr>
     <h1 class="intro-text text-center">
-        <strong>Urunlerimiz Fotoğrafları</strong>
+        <strong>Ürünlerimiz Fotoğrafları</strong>
     </h1>
     <hr>
 </div>
 @{int a = 0; }
-@foreach (var item in Model.Images)
+<div class="col-lg-12">
+    <h4>
+        KADIN GİYİM
+        <br>
+    </h4>
+</div>
+<br>
+@foreach (var item in Model.Images.Where(q => q.DBCode == 4))
 {
     a += 1;
     <div class="form-group col-sm-4 text-center" style="height:100% !important">
@@ -128,10 +137,10 @@
             <h4>
                 <textarea class="form-control" id="text" name="text" style="resize:none">@item.Text</textarea>
             </h4>
-            <button style="margin:10px" type="submit" class="btn btn-primary" formaction="@Url.Action("UpdateSliderText", "Urunlerimiz", new { Area = "Admin" })">
+            <button style="margin:10px" type="submit" class="btn btn-primary" formaction="@Url.Action("UpdateImageText", "Urunlerimiz", new { Area = "Admin" })">
                 <i class="fa fa fa-recycle"></i> Düzenle
             </button>
-            <button style="margin:10px" type="submit" class="btn btn-danger" formaction="@Url.Action("DeleteSlider", "Urunlerimiz", new { Area = "Admin" })" onclick="return confirm()">
+            <button style="margin:10px" type="submit" class="btn btn-danger" formaction="@Url.Action("DeleteImage", "Urunlerimiz", new { Area = "Admin" })" onclick="return confirm()">
                 <i class="fa fa fa-trash"></i> Sil
             </button>
         </form>
@@ -141,25 +150,73 @@
         <div class="clearfix"></div>
     }
 }
-<div class="form-group col-lg-12">
-@foreach (var item in Model.Contents)
+<div class="col-lg-12">
+    <h4>
+        ERKEK GİYİM
+        <br>
+    </h4>
+</div>
+<br>
+@{ a = 0; }
+@foreach (var item in Model.Images.Where(q => q.DBCode == 5))
 {
-    <div class="col-sm-4 text-center" style="height:100% !important">
+    a += 1;
+    <div class="form-group col-sm-4 text-center" style="height:100% !important">
         <form method="post">
             <input type="hidden" name="ID" id="ID" value="@item.ID" />
             <input type="hidden" name="CreatedDate" id="CreatedDate" value="@item.CreatedDate" />
             <input type="hidden" name="DBCode" id="DBCode" value="@item.DBCode" />
-            <div class="form-group col-lg-12">
-                <textarea class="form-control" id="text" name="text" style="resize:none">@item.Title</textarea>
+            <input type="hidden" name="Code" id="Code" value="@item.Code" />
+            <input type="hidden" name="FilePath" id="FilePath" value="@item.FilePath" />
+            <img class="img-responsive img-thumbnail" src="@Url.Content(item.FilePath)" alt="@item.Code">
+            <h4>
                 <textarea class="form-control" id="text" name="text" style="resize:none">@item.Text</textarea>
-            </div>
-            <button style="margin:10px" type="submit" class="btn btn-primary" formaction="@Url.Action("UpdateSliderText", "Urunlerimiz", new { Area = "Admin" })">
+            </h4>
+            <button style="margin:10px" type="submit" class="btn btn-primary" formaction="@Url.Action("UpdateImageText", "Urunlerimiz", new { Area = "Admin" })">
                 <i class="fa fa fa-recycle"></i> Düzenle
             </button>
-            <button style="margin:10px" type="submit" class="btn btn-danger" formaction="@Url.Action("DeleteSlider", "Urunlerimiz", new { Area = "Admin" })" onclick="return confirm()">
+            <button style="margin:10px" type="submit" class="btn btn-danger" formaction="@Url.Action("DeleteImage", "Urunlerimiz", new { Area = "Admin" })" onclick="return confirm()">
                 <i class="fa fa fa-trash"></i> Sil
             </button>
         </form>
     </div>
+    if (a % 3 == 0)
+    {
+        <div class="clearfix"></div>
+    }
 }
+<div class="col-lg-12">
+    <h4>
+        DİĞER MODEL VE RENKLERİMİZ
+        <br>
+    </h4>
 </div>
+<br>
+@{ a = 0; }
+@foreach (var item in Model.Images.Where(q => q.DBCode == 6))
+{
+    a += 1;
+    <div class="form-group col-sm-4 text-center" style="height:100% !important">
+        <form method="post">
+            <input type="hidden" name="ID" id="ID" value="@item.ID" />
+            <input type="hidden" name="CreatedDate" id="CreatedDate" value="@item.CreatedDate" />
+            <input type="hidden" name="DBCode" id="DBCode" value="@item.DBCode" />
+            <input type="hidden" name="Code" id="Code" value="@item.Code" />
+            <input type="hidden" name="FilePath" id="FilePath" value="@item.FilePath" />
+            <img class="img-responsive img-thumbnail" src="@Url.Content(item.FilePath)" alt="@item.Code">
+            <h4>
+                <textarea class="form-control" id="text" name="text" style="resize:none">@item.Text</textarea>
+            </h4>
+            <button style="margin:10px" type="submit" class="btn btn-primary" formaction="@Url.Action("UpdateImageText", "Urunlerimiz", new { Area = "Admin" })">
+                <i class="fa fa fa-recycle"></i> Düzenle
+            </button>
+            <button style="margin:10px" type="submit" class="btn btn-danger" formaction="@Url.Action("DeleteImage", "Urunlerimiz", new { Area = "Admin" })" onclick="return confirm()">
+                <i class="fa fa fa-trash"></i> Sil
+            </button>
+        </form>
+    </div>
+    if (a % 3 == 0)
+    {
+        <div class="clearfix"></div>
+    }
+}
