@@ -5,7 +5,6 @@
 }
 
 <div class="col-lg-12 text-center">
-    <div>
         <div style="height:100% !important">
             @using (Html.BeginForm("UploadFiles", "Anasayfa", new { Area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
@@ -15,8 +14,8 @@
                     </label>
                     <input style="margin:15px" id="saveImage" class="btn btn-success" type="submit" value="Yükle" disabled />
                 </div>
-                <div class="form-group col-lg-12 hidden" id="imageDiv" style="height:445px !important">
-                    <div class="form-group col-lg-12">
+                <div class="form-group col-lg-12 hidden" id="imageDiv" style="height:500px !important">
+                    <div class="form-group col-lg-12" style="height:445px !important;width:100%">
                         <img style="height:100% !important;width:100% !important" class="img-responsive img-full" src="#" id="showImage">
                     </div>
                     <div class="form-group col-lg-12">
@@ -27,9 +26,9 @@
                         <div class="form-group col-lg-2"></div>
                     </div>
                 </div>
+                
             }
         </div>
-    </div>
 </div>
 
 <div class="col-lg-12">
@@ -51,20 +50,20 @@
             <input type="hidden" name="DBCode" id="DBCode" value="@item.DBCode" />
             <input type="hidden" name="Code" id="Code" value="@item.Code" />
             <input type="hidden" name="FilePath" id="FilePath" value="@item.FilePath" />
-            <a href="@Url.Content(item.FilePath)" data-title="@item.Text" data-lightbox="roadtripSlider"><img class="img-responsive img-thumbnail" src="@Url.Content(item.FilePath)" alt="@item.Code"></a>
+            <a href="@Url.Content(item.FilePath)" data-title="@item.Text" data-lightbox="roadtripSlider"><img class="img-responsive img-thumbnail" style="height:150px !important;width:100% !important" src="@Url.Content(item.FilePath)" alt="@item.Code"></a>
             <h4>
                 <textarea class="form-control" id="text" name="text" style="resize:none">@item.Text</textarea>
             </h4>
-            <button style="margin-right:10px" type="submit" class="btn btn-primary" formaction="@Url.Action("UpdateSliderText", "Anasayfa", new { Area = "Admin" })">
+            <button style="margin:10px" type="submit" class="btn btn-primary" formaction="@Url.Action("UpdateSliderText", "Anasayfa", new { Area = "Admin" })">
                 <i class="fa fa fa-recycle"></i> Düzenle
             </button>
-            <button style="margin-left:10px" type="submit" class="btn btn-danger" formaction="@Url.Action("DeleteSlider", "Anasayfa", new { Area = "Admin" })" onclick="return confirm()">
+            <button style="margin:10px" type="submit" class="btn btn-danger" formaction="@Url.Action("DeleteSlider", "Anasayfa", new { Area = "Admin" })" onclick="return confirm()">
                 <i class="fa fa fa-trash"></i> Sil
             </button>
         </div>
         @if (a % 3 == 0)
         {
-        <div class="clearfix"></div>
+            <div class="clearfix"></div>
         }
     </form>
 }

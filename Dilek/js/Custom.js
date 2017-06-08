@@ -15,5 +15,18 @@
     }
 }
 function showDiv() {
-    document.getElementById('area').style.display = "block";
+    debugger;
+    if (document.getElementById('area').style.display == "block") {
+        document.getElementById('area').style.display = "none";
+    } else {
+        document.getElementById('area').style.display = "block";
+    }
+}
+function showLocation() {
+    debugger;
+    if (document.getElementById('location').style.display == "block") {
+        document.getElementById('location').style.display = "none";
+    } else {
+        document.getElementById('location').style.display = "block";
+    }
 }
